@@ -3,13 +3,13 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 
-class BaseSourceConnectionInterface(ABC):
+class SourceConnectionInterface(ABC):
     '''Interface for any kind of data source, comprising it's minimal set of
     methods.
     '''
 
     def prepare_extraction(
-        self: 'BaseSourceConnectionInterface',
+        self: 'SourceConnectionInterface',
         parameters: Any = None,
     ) -> dict:
         '''Prepare an extraction and return a fingerprint for further queries.
@@ -26,7 +26,7 @@ class BaseSourceConnectionInterface(ABC):
         return parameters
 
     def get_status_of_extraction(
-        self: 'BaseSourceConnectionInterface',
+        self: 'SourceConnectionInterface',
         extraction_fingerprint: Any = None,
     ) -> Any:
         '''Return the current status of a prepared extraction using its finger-
@@ -43,7 +43,7 @@ class BaseSourceConnectionInterface(ABC):
         return None
 
     def check_availability_of_extraction(
-        self: 'BaseSourceConnectionInterface',
+        self: 'SourceConnectionInterface',
         status: Any,
     ) -> bool:
         '''Indicate whether an extraction is ready or not according to a speci-
@@ -58,7 +58,7 @@ class BaseSourceConnectionInterface(ABC):
 
     @abstractmethod
     def execute_extraction(
-        self: 'BaseSourceConnectionInterface',
+        self: 'SourceConnectionInterface',
         extraction_fingerprint: Any = None,
     ) -> Any:
         '''Execute an extraction and returns a result.
@@ -75,7 +75,7 @@ class BaseSourceConnectionInterface(ABC):
         pass
 
     def clean_resources_of_extraction(
-        self: 'BaseSourceConnectionInterface',
+        self: 'SourceConnectionInterface',
         extraction_fingerprint: Any = None,
     ) -> bool:
         '''Attempt to clean resources that might have been allocated for an ex-

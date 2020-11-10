@@ -2,15 +2,14 @@
 from typing import Any, List, Tuple
 from datetime import datetime
 
-from .connections.base_source_connection_interface import \
-        BaseSourceConnectionInterface
+from .source_connection_interface import SourceConnectionInterface
 
 
 class Extraction:
     '''Describe the procedure of data fetching.
 
     :param source: a data source class or instance
-    :type source: BaseSourceConnection
+    :type source: SourceConnection
     :param parameters: a dictionary with the extraction parameters
     :type parameters: dict, optional
 
@@ -20,14 +19,14 @@ class Extraction:
     Every extraction may have a fingerprint and a list of pairs (timestamp,
     status), from which one may check if the extraction is ready or not.
     '''
-    source: BaseSourceConnectionInterface
+    source: SourceConnectionInterface
     parameters: Any
     fingerprint: Any
     status_over_time: list
 
     def __init__(
         self: 'Extraction',
-        source: BaseSourceConnectionInterface,
+        source: SourceConnectionInterface,
         parameters: Any = None
     ) -> None:
         '''Please, refer to the class documentation.'''

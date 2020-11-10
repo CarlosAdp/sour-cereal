@@ -1,17 +1,24 @@
 name = 'sour-cereal'
-version = '0.9'
+version = '1.0'
 
 author = 'Carlos Alberto Duarte Pinto'
 author_email = 'carlos.adpinto@gmail.com'
 
+keywords = ['abstraction', 'data extraction', 'data sources', 'interface',
+            'etl']
+
 description = 'An abstraction of data source for extraction applications usage'
 
-url = 'https://github.com/CarlosAdp/sour-cereal'
+url = 'https://github.com/CarlosAdp/sour-cereal/archive/v0.9.tar.gz'
 
 classifiers = [
-    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
     'Operating System :: OS Independent',
-    'Topic :: Utilities'
+    'Topic :: Utilities',
+    'License :: OSI Approved :: MIT License',
+    'Intended Audience :: Developers'
 ]
 
-license = 'Brazilian Army'
+license = 'MIT'

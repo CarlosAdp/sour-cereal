@@ -1,7 +1,7 @@
 from typing import Any
 
-from .source_connection_interface import SourceConnectionInterface
-from .extraction import Extraction
+from .base.source_connection_interface import SourceConnectionInterface
+from .base.extraction import Extraction
 
 
 class SourceConnection(SourceConnectionInterface):

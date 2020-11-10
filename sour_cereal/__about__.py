@@ -1,5 +1,5 @@
 name = 'sour-cereal'
-version = '0.1'
+version = '0.9'
 
 author = 'Carlos Alberto Duarte Pinto'
 author_email = 'carlos.adpinto@gmail.com'

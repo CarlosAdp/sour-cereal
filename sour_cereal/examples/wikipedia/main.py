@@ -15,33 +15,34 @@ class WikiTableConnection(SourceConnection):
         return table
 
 
-con = WikiTableConnection()
+if __name__ == '__main__':
+    con = WikiTableConnection()
 
-parameters = {
-    'gdps': {
-        'url': 'https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nomi' +
-        'nal)',
-        'table_index': 7
+    parameters = {
+        'gdps': {
+            'url': 'https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(' +
+            'nominal)',
+            'table_index': 7
 
-    },
-    'companies': {
-        'url': 'https://en.wikipedia.org/wiki/List_of_largest_companies_by_r' +
-        'evenue',
-        'table_index': 0
+        },
+        'companies': {
+            'url': 'https://en.wikipedia.org/wiki/List_of_largest_companies_' +
+            'by_revenue',
+            'table_index': 0
+        }
     }
-}
 
-extractions = {
-    tag: con.new_extraction(parameters=parameters[tag])
-    for tag in parameters
-}
+    extractions = {
+        tag: con.new_extraction(parameters=parameters[tag])
+        for tag in parameters
+    }
 
-results = {
-    tag: extractions[tag].execute()
-    for tag in parameters
-}
+    results = {
+        tag: extractions[tag].execute()
+        for tag in parameters
+    }
 
-for tag, result in results.items():
-    print(tag + ':' + '\n---------------------------------------\n')
-    print(result)
-    print('\n')
+    for tag, result in results.items():
+        print(tag + ':' + '\n---------------------------------------\n')
+        print(result)
+        print('\n')

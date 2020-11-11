@@ -9,7 +9,7 @@ keywords = ['abstraction', 'data extraction', 'data sources', 'interface',
 
 description = 'An abstraction of data source for extraction applications usage'
 
-url = 'https://github.com/CarlosAdp/sour-cereal/archive/v0.9.tar.gz'
+url = 'https://github.com/CarlosAdp/sour-cereal/archive/v1.0.tar.gz'
 
 classifiers = [
     'Programming Language :: Python :: 3.6',

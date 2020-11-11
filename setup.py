@@ -18,6 +18,7 @@ setuptools.setup(
     description=about['description'],
     long_description=long_description,
     long_description_content_type='text/markdown',
+    keywords=about['keywords'],
     url=about['url'],
     packages=setuptools.find_packages(),
     install_requires=[],

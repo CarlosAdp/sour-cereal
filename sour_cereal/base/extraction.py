@@ -88,6 +88,9 @@ class Extraction:
         which data was writing, the data itself, etc.
         :rtype: Any
         '''
+        if self.fingerprint is None:
+            self.prepare()
+
         return self.source.execute_extraction(self.fingerprint)
 
     def clean_resources(self: 'Extraction') -> bool:

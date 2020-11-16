@@ -20,6 +20,7 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     keywords=about['keywords'],
     url=about['url'],
+    download_url=about['url'],
     packages=setuptools.find_packages(),
     install_requires=[],
     classifiers=about['classifiers'],

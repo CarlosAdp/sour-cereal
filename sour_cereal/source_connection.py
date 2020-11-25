@@ -20,3 +20,19 @@ class SourceConnection(SourceConnectionInterface):
         '''Return a new extraction with parameters and this instance as source.
         '''
         return Extraction(source=self, parameters=parameters)
+
+    def get_prepared_extraction(
+        self: 'SourceConnection',
+        fingerprint: Any
+    ) -> Extraction:
+        '''Return a prepared extraction according to a given fingerprint.
+
+        :param fingerprint: an existing extraction's fingerprint
+        :type fingerprint: Any
+        :return: an extraction defined by the given fingerprint
+        :rtype: Extraction
+        '''
+        extraction = Extraction(source=self)
+        extraction.fingerprint = fingerprint
+
+        return extraction

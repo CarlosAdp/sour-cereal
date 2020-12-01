@@ -22,7 +22,7 @@ class Extraction:
     source: SourceConnectionInterface
     parameters: Any
     fingerprint: Any
-    status_over_time: list
+    status_over_time: List[Tuple[datetime, Any]]
 
     def __init__(
         self: 'Extraction',
@@ -42,31 +42,34 @@ class Extraction:
         '''
         self.fingerprint = self.source.prepare_extraction(self.parameters)
 
-    def get_all_status(self: 'Extraction') -> List[Tuple]:
+    def get_all_status(self: 'Extraction') -> List[Tuple[datetime, Any]]:
         '''Return all extraction's status
 
         :return: the description of the current status
-        :rtype: Any
+        :rtype: List[Tuple[datetime, Any]]
         '''
         return self.status_over_time
 
-    def get_current_status(self: 'Extraction') -> Tuple:
+    def get_current_status(self: 'Extraction') -> Any:
         '''Return only the current status
 
         :return: only the current status of the extraction
-        :rtype: Tuple
+        :rtype: Any
         '''
-        return next(filter(lambda t: t[0], self.status_over_time), None)[1]
+        if len(self.status_over_time) > 0:
+            return self.status_over_time[-1][1]
+
+        return None
 
     def update_status(self: 'Extraction') -> None:
         '''Update status list with a new status.
 
         :raises IOError: raised when the method does not succeed.
         '''
-        self.status_over_time.append(
-            (datetime.now(),
-             self.source.get_status_of_extraction(self.fingerprint))
-        )
+        self.status_over_time.append((
+            datetime.now(),
+            self.source.get_status_of_extraction(self.fingerprint)
+        ))
 
     def is_ready(self: 'Extraction') -> bool:
         '''Indicate whether the extraction is ready or not (may use the

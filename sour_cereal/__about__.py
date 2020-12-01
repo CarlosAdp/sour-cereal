@@ -11,8 +11,8 @@ description = 'An abstraction of data source for extraction applications usage'
 
 url = 'https://github.com/CarlosAdp/sour-cereal'
 
-download_url = f'https://github.com/CarlosAdp/sour-cereal/archive/{version}' +\
-        '.tar.gz'
+download_url = 'https://github.com/CarlosAdp/sour-cereal/archive/' +\
+        f'v{version}.tar.gz'
 
 classifiers = [
     'Programming Language :: Python :: 3.6',

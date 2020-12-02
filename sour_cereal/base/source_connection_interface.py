@@ -44,11 +44,14 @@ class SourceConnectionInterface(ABC):
 
     def check_availability_of_extraction(
         self: 'SourceConnectionInterface',
-        status: Any,
+        extraction_fingerprint: Any = None,
+        status: Any = None,
     ) -> bool:
         '''Indicate whether an extraction is ready or not according to a speci-
         fic status.
 
+        :param extraction_fingerprint: the ethe extraction's identifier
+        :type extraction_fingerprint: Any, optional
         :param status: a specific status of the extraction
         :type status: Any, optional
         :return: `True` if it's ready and `False` otherwise

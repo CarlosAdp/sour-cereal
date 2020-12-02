@@ -80,6 +80,7 @@ class Extraction:
         :rtype: bool
         '''
         return self.source.check_availability_of_extraction(
+            self.fingerprint,
             self.get_current_status()
         )
 

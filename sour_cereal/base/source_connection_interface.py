@@ -63,6 +63,7 @@ class SourceConnectionInterface(ABC):
     def execute_extraction(
         self: 'SourceConnectionInterface',
         extraction_fingerprint: Any = None,
+        status: Any = None,
     ) -> Any:
         '''Execute an extraction and returns a result.
 
@@ -70,6 +71,8 @@ class SourceConnectionInterface(ABC):
 
         :param extraction_fingerprint: the ethe extraction's identifier
         :type extraction_fingerprint: Any, optional
+        :param status: a specific status of the extraction
+        :type status: Any, optional
         :raises IOError: raised when the method does not succeed.
         :return: the result of the extraction. It may be a list of filenames to
         which data was writing, the data itself, etc.

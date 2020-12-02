@@ -95,7 +95,10 @@ class Extraction:
         if self.fingerprint is None:
             self.prepare()
 
-        return self.source.execute_extraction(self.fingerprint)
+        return self.source.execute_extraction(
+            self.fingerprint,
+            self.get_current_status()
+        )
 
     def clean_resources(self: 'Extraction') -> bool:
         '''Attempt to clean resources that might have been allocated for the

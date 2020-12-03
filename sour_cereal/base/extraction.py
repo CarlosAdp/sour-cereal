@@ -84,6 +84,20 @@ class Extraction:
             self.get_current_status()
         )
 
+    def is_done(self: 'Extraction') -> bool:
+        '''Indicate whether the extraction is done/finished/executed (may use
+        the `get_current_status` method).
+
+        :raises IOError: raised when the method does not succeed.
+        :return: `True` if it's done/finished/executed and does not need fur-
+        ther execution. `False` otherwise
+        :rtype: bool
+        '''
+        return self.source.check_availability_of_extraction(
+            self.fingerprint,
+            self.get_current_status()
+        )
+
     def execute(self: 'Extraction') -> Any:
         '''Execute the extraction and return a result.
 

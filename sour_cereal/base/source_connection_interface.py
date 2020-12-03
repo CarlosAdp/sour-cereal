@@ -59,6 +59,23 @@ class SourceConnectionInterface(ABC):
         '''
         return True
 
+    def check_completion_of_extraction(
+        self: 'SourceConnectionInterface',
+        extraction_fingerprint: Any = None,
+        status: Any = None,
+    ) -> bool:
+        '''Indicate whether an extraction is finished (executed) or not.
+
+        :param extraction_fingerprint: the ethe extraction's identifier
+        :type extraction_fingerprint: Any, optional
+        :param status: a specific status of the extraction
+        :type status: Any, optional
+        :return: `True` if the extraction is done/finished/complete and does
+        not need further execution. `False` otherwise
+        :rtype: bool
+        '''
+        return True
+
     @abstractmethod
     def execute_extraction(
         self: 'SourceConnectionInterface',

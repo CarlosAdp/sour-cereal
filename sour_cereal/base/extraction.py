@@ -93,7 +93,22 @@ class Extraction:
         ther execution. `False` otherwise
         :rtype: bool
         '''
-        return self.source.check_availability_of_extraction(
+        return self.source.check_completion_of_extraction(
+            self.fingerprint,
+            self.get_current_status()
+        )
+
+    def has_failed(self: 'Extraction') -> bool:
+        '''Indicate whether the extraction has failed either during its prepa-
+        ration or during its execution (may use the `get_current_status`
+        method).
+
+        :raises IOError: raised when the method does not succeed.
+        :return: `True` if the extraction's preparation or execution have fail-
+        ed. `False` otherwise
+        :rtype: bool
+        '''
+        return self.source.check_failure_of_extraction(
             self.fingerprint,
             self.get_current_status()
         )

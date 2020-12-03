@@ -34,7 +34,7 @@ class SourceConnectionInterface(ABC):
 
         This method shall raise an IOError if it does not succeed.
 
-        :param extraction_fingerprint: the ethe extraction's identifier
+        :param extraction_fingerprint: the extraction's identifier
         :type extraction_fingerprint: Any, optional
         :raises IOError: raised when the method does not succeed.
         :return: the description of the current status of an extraction
@@ -50,7 +50,7 @@ class SourceConnectionInterface(ABC):
         '''Indicate whether an extraction is ready or not according to a speci-
         fic status.
 
-        :param extraction_fingerprint: the ethe extraction's identifier
+        :param extraction_fingerprint: the extraction's identifier
         :type extraction_fingerprint: Any, optional
         :param status: a specific status of the extraction
         :type status: Any, optional
@@ -66,12 +66,30 @@ class SourceConnectionInterface(ABC):
     ) -> bool:
         '''Indicate whether an extraction is finished (executed) or not.
 
-        :param extraction_fingerprint: the ethe extraction's identifier
+        :param extraction_fingerprint: the extraction's identifier
         :type extraction_fingerprint: Any, optional
         :param status: a specific status of the extraction
         :type status: Any, optional
         :return: `True` if the extraction is done/finished/complete and does
         not need further execution. `False` otherwise
+        :rtype: bool
+        '''
+        return True
+
+    def check_failure_of_extraction(
+        self: 'SourceConnectionInterface',
+        extraction_fingerprint: Any = None,
+        status: Any = None,
+    ) -> bool:
+        '''Indicate whether an extraction has failed, either during the prepa-
+        ration or during the execution.
+
+        :param extraction_fingerprint: the extraction's identifier
+        :type extraction_fingerprint: Any, optional
+        :param status: a specific status of the extraction
+        :type status: Any, optional
+        :return: `True` if the extraction's preparation or execution have fail-
+        ed. `False` otherwise
         :rtype: bool
         '''
         return True
@@ -86,7 +104,7 @@ class SourceConnectionInterface(ABC):
 
         This method shall raise an IOError if it does not succeed.
 
-        :param extraction_fingerprint: the ethe extraction's identifier
+        :param extraction_fingerprint: the extraction's identifier
         :type extraction_fingerprint: Any, optional
         :param status: a specific status of the extraction
         :type status: Any, optional
@@ -106,7 +124,7 @@ class SourceConnectionInterface(ABC):
 
         This method shall raise an IOError if it does not succeed.
 
-        :param extraction_fingerprint: the ethe extraction's identifier
+        :param extraction_fingerprint: the extraction's identifier
         :type extraction_fingerprint: Any, optional
         :raises IOError: raised when the method does not succeed.
         :return: `True` if the resources got cleaned and `False` otherwise

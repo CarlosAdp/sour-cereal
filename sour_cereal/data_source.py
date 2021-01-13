@@ -1,80 +1,69 @@
-from typing import Any, Callable, Dict, Tuple, Type
+from typing import Type
 
 from .utils import to_camel_case
+from .utils.mixins import OpenCloseMixin
+
+DEFAULT_THREADSAFETY = 1
+DEFAULT_PARAMSTYLE = 'format'
 
 
-class Cursor(object):
-    connection: 'Connection'
+class Connection(OpenCloseMixin):
+    '''A connection instance a data source.
 
-    def __init__(
-        self: 'Cursor',
-        connection: 'Connection',
-        *args, **kwargs
-    ) -> None:
-        self.connection = connection
+    It's open on instantiation.
+    '''
+    def __init__(self: 'Connection'):
+        super().open()
 
-
-class Connection(object):
-    data_source: 'DataSource'
-    client: Any
-    closed: bool
-
-    def __init__(
-        self: 'Connection',
-        data_source: 'DataSource',
-        *args, **kwargs
-    ) -> None:
-        self.data_source = data_source
-        self.closed = False
-
-    def close(self: 'Connection') -> None:
-        self.closed = True
-
-    def cursor(self: 'Connection', *args, **kwargs) -> Cursor:
-        return Cursor(connection=self, *args, **kwargs)
+    def foo(self):
+        print("AAA")
 
 
-class DataSource(object):
+class DataSourceAPI(object):
+    '''A new data source interface instance.
+
+    *If you need to check which values are permitted for PEP-249 parameters,
+    refer to https://www.python.org/dev/peps/pep-0249/*
+
+    :param name: The name to your new data source API
+    :type name: str
+    :param connection_class: A custom :class:`~.data_source_api.Connection`.
+    This class will be used for connection instantiation and, if not provided,
+    a new class, child of :class:`~.data_source_api.Connection`, with name
+    `<name of API in camel case>Connection` will be defined and used instead.
+    :type connection_class: Type[Connection]
+    :param threadsafety: The level of thread safety the interface supports. De-
+    faults to 1
+    :type threadsafety: int, optional
+    :param paramstyle: The type of parameter marker formatting expected. De-
+    faults to `format`
+    :type paramstyle: str, optional
+    '''
+
     name: str
-    connection_method: Callable
-    apilevel: str = "2.0"
-    threadsafety: int = 1
-    paramstyle: str = 'format'
-    connection_class: Type['Connection']
-    cursor_class: Type['Cursor']
+    apilevel: str = '2.0'
+    threadsafety: int
+    paramstyle: str
+    connection_class: Type[Connection]
 
     def __init__(
-        self: 'DataSource',
+        self: 'DataSourceAPI',
         name: str,
-        connection_class: Type['Connection'] = None,
-        cursor_class: Type['Cursor'] = None,
-        threadsafety: int = 1,
-        paramstyle: str = 'format',
+        *,
+        connection_class: Type[Connection] = None,
+        threadsafety: str = DEFAULT_THREADSAFETY,
+        paramstyle: str = DEFAULT_PARAMSTYLE,
+
     ) -> None:
         self.name = name
-        self.connection_class = connection_class or type(
-            to_camel_case(name) + 'Connection', (Connection, ), {}
-        )
-        self.cursor_class = cursor_class or type(
-            to_camel_case(name) + 'Cursor', (Cursor, ), {}
-        )
         self.threadsafety = threadsafety
         self.paramstyle = paramstyle
+        self.connection_class = connection_class or type(
+            to_camel_case(self.name) + 'Connection', (Connection, ), {}
+        )
 
-        self.connection_method = None
-
-    def connect(self: 'DataSource', *args, **kwargs) -> Connection:
-        creation_method = self.connection_method or self.connection_class
-
-        return creation_method(self, *args, **kwargs)
-
-    def register_connection_method(
-        self: 'DataSource',
-        method: Callable
-    ) -> Callable:
-        self.connection_method = method
-
-        return method
-
-
-register_connection_method = DataSource.register_connection_method
+    def connect(
+        self: 'DataSourceAPI',
+        *args, **kwargs
+    ) -> Connection:
+        return self.connection_class(self, *args, **kwargs)

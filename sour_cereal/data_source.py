@@ -1,21 +1,10 @@
 from typing import Type
 
-from open_close_mixin import OpenCloseMixin
-
 from .utils import to_camel_case
+from .connection import Connection
 
 DEFAULT_THREADSAFETY = 1
 DEFAULT_PARAMSTYLE = 'format'
-
-
-class Connection(OpenCloseMixin):
-    '''A connection instance a data source.
-
-    It's open on instantiation.
-    '''
-    def __init__(self: 'Connection'):
-        super().__init__()
-        self.open()
 
 
 class DataSourceAPI(object):
@@ -65,4 +54,9 @@ class DataSourceAPI(object):
         self: 'DataSourceAPI',
         *args, **kwargs
     ) -> Connection:
+        '''Return a new connection.
+
+        :return: A new connection object
+        :rtype: Connection
+        '''
         return self.connection_class(self, *args, **kwargs)

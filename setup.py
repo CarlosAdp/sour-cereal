@@ -22,7 +22,7 @@ setuptools.setup(
     url=about['url'],
     download_url=about['download_url'],
     packages=setuptools.find_packages(),
-    install_requires=[],
+    install_requires=about['install_requires'],
     classifiers=about['classifiers'],
     license=about['license']
 )

@@ -1,7 +1,8 @@
 from typing import Type
 
+from open_close_mixin import OpenCloseMixin
+
 from .utils import to_camel_case
-from .utils.mixins import OpenCloseMixin
 
 DEFAULT_THREADSAFETY = 1
 DEFAULT_PARAMSTYLE = 'format'
@@ -13,17 +14,15 @@ class Connection(OpenCloseMixin):
     It's open on instantiation.
     '''
     def __init__(self: 'Connection'):
-        super().open()
-
-    def foo(self):
-        print("AAA")
+        super().__init__()
+        self.open()
 
 
 class DataSourceAPI(object):
     '''A new data source interface instance.
 
-    *If you need to check which values are permitted for PEP-249 parameters,
-    refer to https://www.python.org/dev/peps/pep-0249/*
+    *If you need to check which values are available for each of the PEP-249
+    parameters, please refer to https://www.python.org/dev/peps/pep-0249/*
 
     :param name: The name to your new data source API
     :type name: str

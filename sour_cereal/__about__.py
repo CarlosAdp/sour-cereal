@@ -13,13 +13,15 @@ description = (
 
 url = 'https://github.com/CarlosAdp/sour-cereal'
 
-download_url = 'https://github.com/CarlosAdp/sour-cereal/archive/' +\
-        f'v{version}.tar.gz'
+download_url = url + f'/archive/v{version}.tar.gz'
+
+install_requires = [
+    'open-close-mixin>=1.0.0'
+]
 
 classifiers = [
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
     'Operating System :: OS Independent',
     'Topic :: Utilities',
     'License :: OSI Approved :: MIT License',

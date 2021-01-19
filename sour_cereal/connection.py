@@ -7,11 +7,11 @@ from .exceptions import NotSupportedError, ProgrammingError
 
 
 class Connection(OpenCloseMixin):
-    '''A connection instance a data source.
+    '''A connection instance to a data source.
 
     It's open on instantiation.
 
-    :param api: The data source API used to instantiate the connection.
+    :param api: The data source API used to instantiate the connection
     :type api: :class:`~.DataSourceAPI`
     '''
     api: 'DataSourceAPI'
